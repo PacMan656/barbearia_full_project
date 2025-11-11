@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sua Barbearia — Modelo inspirado em Hairy</title>
+    <meta name="description" content="Site de barbearia inspirado no layout do demo Hairy — sem copiar conteúdo protegido. Estrutura: hero, serviços, sobre, preços, galeria, equipe, depoimentos, agendamento, blog e contato." />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: { DEFAULT: '#c8a059', dark: '#a78545' },
+              ink: '#0b0b0b',
+              paper: '#111111',
+              slab: '#1a1a1a'
+            },
+            fontFamily: {
+              display: ['"Playfair Display"', 'serif'],
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'sans-serif']
+            },
+            boxShadow: { soft: '0 10px 30px rgba(0,0,0,.35)' }
+          }
+        }
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      html, body { scroll-behavior: smooth; }
+      .container { max-width: 1200px; }
+      .section-title::after { content: ""; display: block; width: 80px; height: 3px; background: #c8a059; margin: .75rem auto 0; }
+      .gold-gradient { background: linear-gradient(135deg, #e9d8a6 0%, #c8a059 40%, #a78545 100%); }
+      .text-shadow { text-shadow: 0 8px 40px rgba(0,0,0,.6); }
+    </style>
+  </head>
+
+  <body class="bg-paper text-white antialiased">
+    <!-- Header -->
+    <header class="fixed top-0 inset-x-0 z-50 border-b border-white/10 backdrop-blur bg-black/50">
+      <div class="container mx-auto px-4">
+        <div class="h-16 flex items-center justify-between">
+          <a href="#hero" class="flex items-center gap-3">
+            <span class="inline-grid place-items-center h-9 w-9 rounded-full gold-gradient text-ink font-black">SB</span>
+            <strong class="tracking-wide">Sua Barbearia</strong>
+          </a>
+          <nav class="hidden md:flex items-center gap-8 text-sm text-white/80">
+            <a href="#servicos" class="hover:text-white">Serviços</a>
+            <a href="#sobre" class="hover:text-white">Sobre</a>
+            <a href="#precos" class="hover:text-white">Preços</a>
+            <a href="#galeria" class="hover:text-white">Galeria</a>
+            <a href="#equipe" class="hover:text-white">Equipe</a>
+            <a href="#depoimentos" class="hover:text-white">Depoimentos</a>
+            <a href="#agendar" class="hover:text-white">Agendar</a>
+            <a href="#contato" class="hover:text-white">Contato</a>
+          </nav>
+          <div class="hidden md:flex items-center gap-3">
+            <a href="#agendar" class="px-4 py-2 rounded-full border border-brand/40 hover:border-brand text-sm">Agendar</a>
+            <a href="tel:+550000000000" class="px-4 py-2 rounded-full bg-brand hover:bg-brand-dark text-ink font-semibold text-sm">Ligar</a>
+          </div>
+          <button id="btnMenu" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-white/20" aria-label="Abrir menu">☰</button>
+        </div>
+      </div>
+      <div id="mobileNav" class="md:hidden hidden border-t border-white/10 bg-black/70">
+        <nav class="container mx-auto px-4 py-3 grid gap-3 text-sm text-white/90">
+          <a href="#servicos">Serviços</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#precos">Preços</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#equipe">Equipe</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#agendar">Agendar</a>
+          <a href="#contato">Contato</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-20">
+      <!-- HERO -->
+      <section id="hero" class="relative min-h-[84vh] grid place-items-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop" alt="Barbearia" class="absolute inset-0 h-full w-full object-cover opacity-40"/>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-paper"></div>
+        <div class="relative container mx-auto px-4 py-24 text-center">
+          <span class="inline-block px-3 py-1 rounded-full border border-brand/40 text-brand text-xs tracking-wider">DESDE 1998</span>
+          <h1 class="mt-6 text-4xl md:text-6xl font-extrabold font-display text-shadow">
+            Tradição & Estilo em Cada Corte
+          </h1>
+          <p class="mt-4 text-white/80 max-w-2xl mx-auto">Cortes clássicos e modernos, barba desenhada e cuidados premium — tudo em um ambiente pensado para você.</p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="#agendar" class="px-6 py-3 rounded-full bg-brand hover:bg-brand-dark text-ink font-semibold">Agendar horário</a>
+            <a href="#servicos" class="px-6 py-3 rounded-full border border-white/20 hover:bg-white/10">Ver serviços</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVIÇOS -->
+      <section id="servicos" class="py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Nossos Serviços</h2>
+          <p class="mt-3 text-center text-white/70 max-w-2xl mx-auto">Uma seleção dos serviços mais procurados, com profissionais experientes e produtos de alta qualidade.</p>
+          <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <article class="rounded-2xl bg-slab border border-white/10 p-6 shadow-soft">
+              <div class="text-3xl">💈</div>
+              <h3 class="mt-4 font-semibold">Corte Clássico</h3>
+              <p class="mt-2 text-white/70 text-sm">Corte na tesoura e máquina, finalização com pomada.</p>
+            </article>
+            <article class="rounded-2xl bg-slab border border-white/10 p-6 shadow-soft">
+              <div class="text-3xl">🧔</div>
+              <h3 class="mt-4 font-semibold">Barba Modelada</h3>
+              <p class="mt-2 text-white/70 text-sm">Aparar, desenhar e hidratar para um acabamento perfeito.</p>
+            </article>
+            <article class="rounded-2xl bg-slab border border-white/10 p-6 shadow-soft">
+              <div class="text-3xl">💆</div>
+              <h3 class="mt-4 font-semibold">Terapia Capilar</h3>
+              <p class="mt-2 text-white/70 text-sm">Tratamentos para couro cabeludo e fios mais fortes.</p>
+            </article>
+            <article class="rounded-2xl bg-slab border border-white/10 p-6 shadow-soft">
+              <div class="text-3xl">✂️</div>
+              <h3 class="mt-4 font-semibold">Corte Infantil</h3>
+              <p class="mt-2 text-white/70 text-sm">Ambiente acolhedor e estilos que a criançada curte.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section id="sobre" class="py-20 border-y border-white/10 bg-[#0f0f0f]">
+        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-soft">
+              <img src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?q=80&w=1200&auto=format&fit=crop" class="h-full w-full object-cover" alt="Sobre a barbearia"/>
+            </div>
+            <div class="absolute -bottom-6 -left-6 hidden md:block">
+              <div class="bg-slab/90 border border-white/10 rounded-2xl p-4 text-sm">
+                <div class="text-brand font-semibold">+20 anos de história</div>
+                <div class="text-white/70">Milhares de clientes atendidos.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="text-brand font-semibold">Quem somos</span>
+            <h2 class="mt-2 text-3xl md:text-4xl font-display font-bold">Arte, técnica e respeito às raízes</h2>
+            <p class="mt-4 text-white/70">Nossa equipe une tradição e tendências para criar experiências completas, do atendimento ao acabamento. Ambiente intimista, música na medida certa e aquele café que não pode faltar.</p>
+            <ul class="mt-6 grid sm:grid-cols-2 gap-3 text-white/80 text-sm">
+              <li>• Profissionais certificados</li>
+              <li>• Produtos premium</li>
+              <li>• Atendimento com horário marcado</li>
+              <li>• Acessível e com estacionamento</li>
+            </ul>
+            <div class="mt-8 flex gap-3">
+              <a href="#agendar" class="px-5 py-3 rounded-full bg-brand text-ink font-semibold hover:bg-brand-dark">Agendar</a>
+              <a href="#galeria" class="px-5 py-3 rounded-full border border-white/20 hover:bg-white/10">Ver galeria</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PREÇOS -->
+      <section id="precos" class="py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Nossos Preços</h2>
+          <p class="mt-3 text-center text-white/70 max-w-2xl mx-auto">Planos e combinações populares.</p>
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <div class="rounded-2xl bg-slab border border-white/10 p-6">
+              <h3 class="font-semibold">Clássico</h3>
+              <div class="mt-4 text-4xl font-extrabold font-display">R$ 40</div>
+              <ul class="mt-4 space-y-2 text-white/70 text-sm">
+                <li>• Corte masculino</li>
+                <li>• Finalização</li>
+                <li>• Duração média: 30min</li>
+              </ul>
+              <a href="#agendar" class="mt-6 inline-block w-full text-center px-4 py-3 rounded-full bg-brand text-ink font-semibold">Selecionar</a>
+            </div>
+            <div class="rounded-2xl bg-[#121212] border border-brand/50 p-6 ring-2 ring-brand">
+              <div class="inline-block px-2 py-1 text-xs rounded-full bg-brand/20 text-brand border border-brand/30">Mais pedido</div>
+              <h3 class="mt-2 font-semibold">Corte + Barba</h3>
+              <div class="mt-4 text-4xl font-extrabold font-display">R$ 70</div>
+              <ul class="mt-4 space-y-2 text-white/70 text-sm">
+                <li>• Corte + desenho de barba</li>
+                <li>• Toalha quente</li>
+                <li>• Duração média: 60min</li>
+              </ul>
+              <a href="#agendar" class="mt-6 inline-block w-full text-center px-4 py-3 rounded-full bg-brand text-ink font-semibold">Selecionar</a>
+            </div>
+            <div class="rounded-2xl bg-slab border border-white/10 p-6">
+              <h3 class="font-semibold">Premium</h3>
+              <div class="mt-4 text-4xl font-extrabold font-display">R$ 120</div>
+              <ul class="mt-4 space-y-2 text-white/70 text-sm">
+                <li>• Corte + barba + terapia capilar</li>
+                <li>• Bebida cortesia</li>
+                <li>• Duração média: 90min</li>
+              </ul>
+              <a href="#agendar" class="mt-6 inline-block w-full text-center px-4 py-3 rounded-full bg-brand text-ink font-semibold">Selecionar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERIA -->
+      <section id="galeria" class="py-20 border-y border-white/10 bg-[#0f0f0f]">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Galeria</h2>
+          <p class="mt-3 text-center text-white/70 max-w-2xl mx-auto">Alguns registros do nosso trabalho.</p>
+          <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <img class="rounded-xl border border-white/10 object-cover w-full h-56" src="https://tachique.com.br/wp-content/uploads/2024/12/cortes-de-cabelo-masculino-liso20.jpg" alt="Galeria 1"/>
+            <img class="rounded-xl border border-white/10 object-cover w-full h-56" src="https://tachique.com.br/wp-content/uploads/2024/12/cortes-de-cabelo-masculino-liso21.jpg" alt="Galeria 2"/>
+            <img class="rounded-xl border border-white/10 object-cover w-full h-56" src="https://tachique.com.br/wp-content/uploads/2024/12/cortes-de-cabelo-masculino-liso24.jpg" alt="Galeria 3"/>
+            <img class="rounded-xl border border-white/10 object-cover w-full h-56" src="https://tachique.com.br/wp-content/uploads/2024/12/cortes-de-cabelo-masculino-liso63.jpg" alt="Galeria 4"/>
+          </div>
+        </div>
+      </section>
+
+      <!-- EQUIPE -->
+      <section id="equipe" class="py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Nossa Equipe</h2>
+          <p class="mt-3 text-center text-white/70 max-w-2xl mx-auto">Barbeiros apaixonados pelo ofício, prontos para elevar seu estilo.</p>
+          <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1558227691-41ea78d1f631?q=80&w=900&auto=format&fit=crop" alt="Barbeiro 1"/>
+              <div class="p-5">
+                <h3 class="font-semibold">João Santos</h3>
+                <p class="text-white/60 text-sm">Especialista em cortes clássicos</p>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=900&auto=format&fit=crop" alt="Barbeiro 2"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Rafael Lima</h3>
+                <p class="text-white/60 text-sm">Fade e design de barba</p>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=900&auto=format&fit=crop" alt="Barbeiro 3"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Marcos Azevedo</h3>
+                <p class="text-white/60 text-sm">Terapias capilares</p>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=900&auto=format&fit=crop" alt="Barbeiro 4"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Pedro Alves</h3>
+                <p class="text-white/60 text-sm">Corte infantil e estilização</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPOIMENTOS -->
+      <section id="depoimentos" class="py-20 border-y border-white/10 bg-[#0f0f0f]">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">O que falam de nós</h2>
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <blockquote class="rounded-2xl bg-slab border border-white/10 p-6">
+              <p class="text-white/80">“Melhor corte que já fiz! Atendimento impecável.”</p>
+              <footer class="mt-4 text-sm text-white/50">— Carlos Eduardo</footer>
+            </blockquote>
+            <blockquote class="rounded-2xl bg-slab border border-white/10 p-6">
+              <p class="text-white/80">“Ambiente incrível e barbeiros muito atenciosos.”</p>
+              <footer class="mt-4 text-sm text-white/50">— Thiago Moreira</footer>
+            </blockquote>
+            <blockquote class="rounded-2xl bg-slab border border-white/10 p-6">
+              <p class="text-white/80">“Voltei a curtir usar barba depois de conhecer a casa.”</p>
+              <footer class="mt-4 text-sm text-white/50">— Vinícius Rocha</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- AGENDAMENTO -->
+      <section id="agendar" class="py-20">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Agende seu horário</h2>
+          <p class="mt-3 text-center text-white/70 max-w-2xl mx-auto">Preencha o formulário e salvaremos o pedido <strong>localmente</strong>. Ao mesmo tempo, tentaremos enviar para o servidor (quando online).</p>
+
+          <form id="formAgendar" class="mt-10 max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+            <input id="ag_nome" required placeholder="Seu nome" class="px-4 py-3 rounded-xl bg-slab border border-white/10" />
+            <input id="ag_telefone" required type="tel" placeholder="Telefone / WhatsApp" class="px-4 py-3 rounded-xl bg-slab border border-white/10" />
+            <input id="ag_email" required type="email" placeholder="E-mail" class="px-4 py-3 rounded-xl bg-slab border border-white/10 sm:col-span-2" />
+            <select id="ag_servico" class="px-4 py-3 rounded-xl bg-slab border border-white/10">
+              <option value="">Serviço</option>
+              <option value="Corte">Corte</option>
+              <option value="Barba">Barba</option>
+              <option value="Corte + Barba">Corte + Barba</option>
+              <option value="Terapia Capilar">Terapia Capilar</option>
+            </select>
+            <input id="ag_datahora" type="datetime-local" class="px-4 py-3 rounded-xl bg-slab border border-white/10" />
+            <textarea id="ag_obs" rows="4" placeholder="Observações" class="px-4 py-3 rounded-xl bg-slab border border-white/10 sm:col-span-2"></textarea>
+            <div class="sm:col-span-2 flex flex-col sm:flex-row gap-3">
+              <button type="submit" class="flex-1 px-6 py-3 rounded-full bg-brand text-ink font-semibold hover:bg-brand-dark">Salvar localmente + Enviar</button>
+              <button type="button" id="btnLimparTudo" class="flex-1 px-6 py-3 rounded-full border border-white/20 hover:bg-white/10">Limpar tudo</button>
+            </div>
+          </form>
+
+          <div class="mt-12 max-w-4xl mx-auto">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <h3 class="text-xl font-semibold">Meus pedidos (este dispositivo)</h3>
+                <span id="badgeQtde" class="text-xs px-2 py-1 rounded-full border border-white/10 text-white/70">0 itens</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="btnSyncAll" class="px-3 py-2 rounded-lg border border-brand/40 text-brand hover:bg-brand/10 text-sm">Sincronizar tudo</button>
+              </div>
+            </div>
+            <p class="mt-2 text-white/50 text-sm">Pedidos ficam salvos offline e são enviados para o servidor quando possível.</p>
+            <ul id="listaPedidos" class="mt-6 grid gap-3"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG / NOVIDADES -->
+      <section id="blog" class="py-20 border-y border-white/10 bg-[#0f0f0f]">
+        <div class="container mx-auto px-4">
+          <h2 class="section-title text-center text-3xl md:text-4xl font-display font-bold">Novidades</h2>
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <article class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1456327102063-fb5054efe647?q=80&w=1000&auto=format&fit=crop" alt="Post 1"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Cuidados com a barba no inverno</h3>
+                <p class="mt-2 text-white/70 text-sm">Dicas simples para manter a hidratação e o desenho.</p>
+                <a href="#post/barba-inverno" class="read-more mt-4 inline-block text-brand" data-slug="barba-inverno">Ler mais →</a>
+              </div>
+            </article>
+            <article class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-44 w-full object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhioNl4cmoIpwjAaYZj_iLn6YBMbNbcLShn0srTv1GZk4gegA_6IYr4vl3_yL-PBLDQ0ilWEP3ZF-D7nvS51kwvGvyPZyIm4pfLvBgtgxUv3WVnxdnvmkPyqy-O0zfT7_zinA_FrEyoBm85tR_8lJXtBqxvFw_kbPz8M-djcVN-WqOQxVN8zk9caldPp5I/s16000/CORTES-MASCULINOS-2025-FRANJA%20(1).jpg" alt="Post 2"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Tendências de corte 2025</h3>
+                <p class="mt-2 text-white/70 text-sm">O que está em alta para diferentes tipos de cabelo.</p>
+                <a href="#post/tendencias-2025" class="read-more mt-4 inline-block text-brand" data-slug="tendencias-2025">Ler mais →</a>
+              </div>
+            </article>
+            <article class="rounded-2xl overflow-hidden bg-slab border border-white/10">
+              <img class="h-44 w-full object-cover" src="https://http2.mlstatic.com/D_Q_NP_990031-MLB89673579078_082025-F-kit-01-esponja-nudread-barber-01-cera-01-pente.webp" alt="Post 3"/>
+              <div class="p-5">
+                <h3 class="font-semibold">Produtos que recomendamos</h3>
+                <p class="mt-2 text-white/70 text-sm">Seleção de pomadas, óleos e shampoos que usamos na casa.</p>
+                <a href="#post/produtos-recomendados" class="read-more mt-4 inline-block text-brand" data-slug="produtos-recomendados">Ler mais →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTATO -->
+      <section id="contato" class="py-20">
+        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 class="section-title text-3xl md:text-4xl font-display font-bold">Fale com a gente</h2>
+            <p class="mt-3 text-white/70">Endereço, horário de funcionamento e canais de atendimento.</p>
+            <ul class="mt-6 space-y-2 text-white/80">
+              <li>📍 Rua Exemplo, 123 — Centro, Sua Cidade</li>
+              <li>📞 (00) 00000-0000</li>
+              <li>✉️ contato@suabarbearia.com</li>
+              <li>🕒 Seg–Sáb: 9h–19h</li>
+            </ul>
+
+            <!-- CONTROLES DO MAPA -->
+            <div class="mt-6 grid gap-3">
+              <div class="text-sm text-white/70">Pesquisar no mapa:</div>
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input id="mapQuery" class="flex-1 px-4 py-3 rounded-xl bg-slab border border-white/10" placeholder='Ex.: "saloes guadalupe piaui" ou "barbearia Belo Horizonte"' value="saloes guadalupe piaui" />
+                <button id="btnMapSearch" class="px-4 py-3 rounded-xl bg-brand text-ink font-semibold hover:bg-brand-dark">Atualizar mapa</button>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button id="btnSaloesGuadalupe" class="px-3 py-2 rounded-lg border border-brand/40 text-brand hover:bg-brand/10 text-sm">
+                  Salões — Guadalupe-PI
+                </button>
+                <button id="btnResetMap" class="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 text-sm">
+                  Resetar (São Paulo)
+                </button>
+                <a id="btnOpenMaps" href="#" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg bg-brand/20 border border-brand/30 text-brand hover:bg-brand/30 text-sm">
+                  Abrir no Google Maps
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl overflow-hidden border border-white/10 shadow-soft">
+            <!-- Mapa dinâmico (já inicia em Guadalupe-PI) -->
+            <iframe
+              id="mapFrame"
+              title="Mapa"
+              class="w-full h-80"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=saloes%20guadalupe%20piaui&t=&z=14&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- VIEWER DE POST / TELA LER MAIS -->
+    <section id="postView" class="hidden fixed inset-0 z-[60] bg-black/90 overflow-y-auto">
+      <article class="min-h-screen">
+        <header id="postHero" class="h-[38vh] md:h-[46vh] relative">
+          <img id="postHeroImg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50" />
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-paper/60"></div>
+          <div class="relative container mx-auto px-4 h-full flex items-end pb-8">
+            <div>
+              <a id="btnClosePost" href="#" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs hover:bg-white/15">
+                ← Voltar ao site
+              </a>
+              <h1 id="postTitle" class="mt-4 text-3xl md:text-5xl font-display font-extrabold text-shadow"></h1>
+              <p id="postMeta" class="mt-2 text-white/70 text-sm"></p>
+            </div>
+          </div>
+        </header>
+        <div class="container mx-auto px-4 py-10">
+          <div id="postContent" class="prose prose-invert prose-headings:font-display max-w-3xl"></div>
+          <div class="mt-10 max-w-3xl">
+            <a href="#agendar" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-brand text-ink font-semibold hover:bg-brand-dark">Agendar um horário</a>
+          </div>
+          <div class="mt-12 max-w-3xl text-white/60 text-sm">
+            <hr class="border-white/10 my-6">
+            <div>Gostou do conteúdo? Compartilhe com um amigo e passe na loja para um diagnóstico gratuito de estilo.</div>
+            <div class="mt-3">
+              <a id="shareLink" href="#" target="_blank" class="text-brand underline">Copiar link do artigo</a>
+            </div>
+          </div>
+          <div class="h-16"></div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="border-t border-white/10">
+      <div class="container mx-auto px-4 py-8 text-sm text-white/60 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div>© <span id="year"></span> Sua Barbearia — Layout inspirado em <span class="text-white/70">Hairy</span>. Conteúdo ilustrativo.</div>
+        <nav class="flex items-center gap-4">
+          <a href="#" class="hover:text-white">Termos</a>
+          <a href="#" class="hover:text-white">Privacidade</a>
+          <a href="#agendar" class="hover:text-white">Agendar</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // footer year & mobile nav
+        const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+        const btn = document.getElementById('btnMenu');
+        const nav = document.getElementById('mobileNav');
+        btn?.addEventListener('click', () => nav.classList.toggle('hidden'));
+
+        // ====== MAPA: controles e presets ======
+        const mapFrame = document.getElementById('mapFrame');
+        const mapQuery = document.getElementById('mapQuery');
+        const btnMapSearch = document.getElementById('btnMapSearch');
+        const btnSaloesGuadalupe = document.getElementById('btnSaloesGuadalupe');
+        const btnResetMap = document.getElementById('btnResetMap');
+        const btnOpenMaps = document.getElementById('btnOpenMaps');
+
+        const embedFromQuery = (q) => `https://www.google.com/maps?q=${encodeURIComponent(q)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+
+        const LINK_SALOES_GUADALUPE = 'https://www.google.com/maps/search/saloes+guadalupe+piaui/@-6.7894868,-43.5683328,3293m/data=!3m2!1e3!4b1?entry=ttu&g_ep=EgoyMDI1MTEwNC4xIKXMDSoASAFQAw%3D%3D';
+        const EMBED_SALOES_GUADALUPE = embedFromQuery('saloes guadalupe piaui');
+        const DEFAULT_EMBED = embedFromQuery('São Paulo');
+
+        if (btnOpenMaps) btnOpenMaps.href = LINK_SALOES_GUADALUPE;
+
+        btnSaloesGuadalupe?.addEventListener('click', () => {
+          if (mapFrame) mapFrame.src = EMBED_SALOES_GUADALUPE;
+          if (mapQuery) mapQuery.value = 'saloes guadalupe piaui';
+          if (btnOpenMaps) btnOpenMaps.href = LINK_SALOES_GUADALUPE;
+        });
+
+        btnResetMap?.addEventListener('click', () => {
+          if (mapFrame) mapFrame.src = DEFAULT_EMBED;
+          if (mapQuery) mapQuery.value = '';
+          if (btnOpenMaps) btnOpenMaps.href = 'https://www.google.com/maps?q=São%20Paulo';
+        });
+
+        btnMapSearch?.addEventListener('click', () => {
+          const q = (mapQuery?.value || '').trim();
+          if (!q) {
+            alert('Digite algo para pesquisar no mapa (ex.: "saloes guadalupe piaui").');
+            return;
+          }
+          if (mapFrame) mapFrame.src = embedFromQuery(q);
+          if (btnOpenMaps) btnOpenMaps.href = `https://www.google.com/maps/search/${encodeURIComponent(q)}`;
+        });
+
+        // ====== LocalStorage + Backend Sync (agendamentos) ======
+        const KEY = 'agendamentos_v1';
+        const form = document.getElementById('formAgendar');
+        const lista = document.getElementById('listaPedidos');
+        const badge = document.getElementById('badgeQtde');
+        const btnLimparTudo = document.getElementById('btnLimparTudo');
+        const btnSyncAll = document.getElementById('btnSyncAll');
+
+        const API_BASE = 'http://localhost:8080';
+
+        function ler() {
+          try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; }
+        }
+        function salvar(arr) {
+          localStorage.setItem(KEY, JSON.stringify(arr));
+          render();
+        }
+        function atualizar(idx, patch) {
+          const dados = ler();
+          if (dados[idx]) {
+            Object.assign(dados[idx], patch);
+            salvar(dados);
+          }
+        }
+
+        function render() {
+          const dados = ler();
+          if (badge) badge.textContent = `${dados.length} ${dados.length === 1 ? 'item' : 'itens'}`;
+          if (!lista) return;
+          lista.innerHTML = '';
+          if (!dados.length) {
+            lista.innerHTML = '<li class="text-white/60 text-sm border border-white/10 rounded-xl p-4">Nenhum pedido salvo ainda.</li>';
+            return;
+          }
+          dados.forEach((item, idx) => {
+            const li = document.createElement('li');
+            li.className = 'rounded-xl border border-white/10 bg-slab p-4';
+            const status = item.serverStatus || (item._pending ? 'pendente' : 'local');
+            const statusBadge = `<span class="ml-2 text-xs px-2 py-1 rounded-full border ${
+              status==='confirmed' ? 'border-emerald-400 text-emerald-300' :
+              (status==='pending' || status==='pendente') ? 'border-yellow-400 text-yellow-300' :
+              'border-white/20 text-white/60'
+            }">${status}</span>`;
+            li.innerHTML = `
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <div class="font-semibold">${item.nome} <span class="text-white/50 font-normal">• ${item.servico || 'Serviço'}</span> ${statusBadge}</div>
+                  <div class="text-white/60 text-sm">${item.telefone} • ${item.email}</div>
+                  <div class="text-white/50 text-xs mt-1">${item.datahora ? new Date(item.datahora).toLocaleString() : 'Sem data'} • criado em ${new Date(item.criadoEm).toLocaleString()}</div>
+                  ${item.obs ? `<div class="text-white/70 text-sm mt-1">Obs: ${item.obs}</div>` : ''}
+                  ${item.syncedAt ? `<div class="text-white/40 text-xs mt-1">Sincronizado: ${new Date(item.syncedAt).toLocaleString()} (ID servidor: ${item.serverId || '-'})</div>` : ''}
+                </div>
+                <div class="flex gap-2">
+                  <button data-sync="${idx}" class="px-3 py-2 rounded-lg border border-brand/40 text-brand hover:bg-brand/10 text-sm">Sincronizar</button>
+                  <button data-edit="${idx}" class="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 text-sm">Editar</button>
+                  <button data-del="${idx}" class="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 text-sm">Excluir</button>
+                </div>
+              </div>`;
+            lista.appendChild(li);
+          });
+        }
+
+        async function enviarParaServidor(item) {
+          const body = {
+            name: item.nome,
+            phone: item.telefone,
+            email: item.email,
+            service: item.servico || null,
+            datetime: item.datahora || null,
+            notes: item.obs || null
+          };
+          const resp = await fetch(`${API_BASE}/appointments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          if (!resp.ok) throw new Error('Falha ao enviar');
+          return resp.json();
+        }
+
+        async function syncIndex(idx) {
+          const dados = ler();
+          const item = dados[idx];
+          if (!item) return;
+          dados[idx]._pending = true; // mark pending
+          try {
+            localStorage.setItem(KEY, JSON.stringify(dados));
+            const res = await enviarParaServidor(item);
+            atualizar(idx, { _pending: false, serverId: res.id, serverStatus: res.status || 'pending', syncedAt: Date.now() });
+          } catch (e) {
+            atualizar(idx, { _pending: true });
+            console.warn('Erro ao sincronizar item', idx, e);
+          }
+        }
+
+        async function syncAll() {
+          const dados = ler();
+          for (let i = 0; i < dados.length; i++) {
+            if (!dados[i].serverId) {
+              await syncIndex(i);
+            }
+          }
+        }
+
+        form?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const payload = {
+            nome: document.getElementById('ag_nome')?.value.trim() || '',
+            telefone: document.getElementById('ag_telefone')?.value.trim() || '',
+            email: document.getElementById('ag_email')?.value.trim() || '',
+            servico: document.getElementById('ag_servico')?.value || '',
+            datahora: document.getElementById('ag_datahora')?.value || '',
+            obs: document.getElementById('ag_obs')?.value.trim() || '',
+            criadoEm: Date.now(),
+            _pending: true
+          };
+          if (!payload.nome || !payload.telefone || !payload.email) {
+            alert('Preencha nome, telefone e e-mail.');
+            return;
+          }
+          const dados = ler();
+          dados.push(payload);
+          localStorage.setItem(KEY, JSON.stringify(dados));
+          render();
+          form.reset();
+          await syncIndex(dados.length - 1);
+        });
+
+        const listaPedidos = document.getElementById('listaPedidos');
+        listaPedidos?.addEventListener('click', async (e) => {
+          const t = e.target;
+          if (t.matches('[data-del]')) {
+            const idx = Number(t.getAttribute('data-del'));
+            const dados = ler();
+            dados.splice(idx, 1);
+            salvar(dados);
+          }
+          if (t.matches('[data-edit]')) {
+            const idx = Number(t.getAttribute('data-edit'));
+            const dados = ler();
+            const item = dados[idx];
+            document.getElementById('ag_nome') && (document.getElementById('ag_nome').value = item.nome || '');
+            document.getElementById('ag_telefone') && (document.getElementById('ag_telefone').value = item.telefone || '');
+            document.getElementById('ag_email') && (document.getElementById('ag_email').value = item.email || '');
+            document.getElementById('ag_servico') && (document.getElementById('ag_servico').value = item.servico || '');
+            document.getElementById('ag_datahora') && (document.getElementById('ag_datahora').value = item.datahora || '');
+            document.getElementById('ag_obs') && (document.getElementById('ag_obs').value = item.obs || '');
+            dados.splice(idx, 1);
+            salvar(dados);
+            const agSec = document.getElementById('agendar');
+            if (agSec) window.scrollTo({ top: agSec.offsetTop - 80, behavior: 'smooth' });
+          }
+          if (t.matches('[data-sync]')) {
+            const idx = Number(t.getAttribute('data-sync'));
+            await syncIndex(idx);
+          }
+        });
+
+        btnLimparTudo?.addEventListener('click', () => {
+          if (confirm('Apagar todos os pedidos salvos neste dispositivo?')) {
+            localStorage.removeItem(KEY);
+            render();
+          }
+        });
+
+        document.getElementById('btnSyncAll')?.addEventListener('click', async () => {
+          await syncAll();
+        });
+
+        window.addEventListener('online', () => syncAll());
+
+        render();
+        syncAll();
+
+        // ====== BLOG VIEWER (telas "Ler mais") ======
+        const postDB = {
+          'barba-inverno': {
+            title: 'Cuidados com a barba no inverno',
+            cover: 'https://images.unsplash.com/photo-1456327102063-fb5054efe647?q=80&w=1600&auto=format&fit=crop',
+            author: 'Equipe Sua Barbearia',
+            date: 'Atualizado em ' + new Date().toLocaleDateString(),
+            html: `
+              <p>Com a queda de temperatura, é comum aumentarem o <strong>ressecamento</strong> e a <strong>coceira</strong> na barba. A boa notícia é que com alguns hábitos simples dá para manter o desenho e o conforto durante toda a estação.</p>
+              <h3>Rotina simples em 4 passos</h3>
+              <ol>
+                <li><strong>Higienize 3–4x/semana</strong> com <em>shampoo específico para barba</em> (evite o shampoo de cabelo comum, que tende a ressecar).</li>
+                <li><strong>Hidrate diariamente</strong> com <em>balm</em> ou <em>óleo para barba</em>, focando também na pele abaixo dos fios.</li>
+                <li><strong>Penteie</strong> com escova/pente de madeira para distribuir o produto e alinhar os fios.</li>
+                <li><strong>Finalize</strong> com pomada leve, se quiser controle extra do frizz.</li>
+              </ol>
+              <h3>Erros comuns no frio</h3>
+              <ul>
+                <li>Banhos muito quentes (retiram a oleosidade natural e irritam a pele).</li>
+                <li>Esfregar a toalha com força (quebra os fios). Prefira <em>pressionar</em> para secar.</li>
+                <li>Usar álcool em gel na barba (resseca). Se precisar higienizar, lave e hidrate.</li>
+              </ul>
+              <blockquote>Quer um ajuste no desenho? <a href="#agendar" class="text-brand">Agende</a> uma manutenção rápida — dura menos de 30 minutos.</blockquote>
+            `
+          },
+          'tendencias-2025': {
+            title: 'Tendências de corte 2025',
+            cover: 'https://images.unsplash.com/photo-1604671801904-9a6c0fbfb8b7?q=80&w=1600&auto=format&fit=crop',
+            author: 'Time de Estilo',
+            date: 'Guia 2025',
+            html: `
+              <p>O ano chega com um mix de <strong>nostalgia</strong> e <strong>minimalismo funcional</strong>. A ideia é valorizar o formato do rosto e a rotina de cada pessoa — menos manutenção, mais identidade.</p>
+              <h3>Top 5 que vão bombar</h3>
+              <ul>
+                <li><strong>Texturizado médio</strong>: volume no topo, laterais limpas, acabamento natural.</li>
+                <li><strong>Buzz com degradê</strong>: prático, moderno e combina com barba marcada.</li>
+                <li><strong>Crop francês</strong>: franja curta texturizada, ajuda a disfarçar entradas.</li>
+                <li><strong>Side part clássico</strong>: risco discreto, versátil para trabalho e casual.</li>
+                <li><strong>Curly control</strong>: definição dos cachos com tesoura e produtos certos.</li>
+              </ul>
+              <h3>Como escolher</h3>
+              <p>Leve em conta <em>formato do rosto</em>, <em>densidade do fio</em> e <em>tempo de styling</em> que você topa investir. Na dúvida, marque uma consultoria rápida — a primeira é cortesia.</p>
+            `
+          },
+          'produtos-recomendados': {
+            title: 'Produtos que recomendamos',
+            cover: 'https://images.unsplash.com/photo-1542323517-608d8b04236e?q=80&w=1600&auto=format&fit=crop',
+            author: 'Barbeiros da Casa',
+            date: 'Seleção da equipe',
+            html: `
+              <p>Selecionamos itens que usamos no dia a dia na barbearia. A ideia é simples: <strong>poucos produtos, bem escolhidos</strong>, que resolvem 90% dos casos.</p>
+              <h3>Barba</h3>
+              <ul>
+                <li><strong>Shampoo de barba</strong>: limpa sem ressecar; usar 3–4x/semana.</li>
+                <li><strong>Balm</strong>: hidrata e acalma a pele, ideal para coceira.</li>
+                <li><strong>Óleo</strong>: brilho e maciez, 3–5 gotas são suficientes.</li>
+              </ul>
+              <h3>Cabelo</h3>
+              <ul>
+                <li><strong>Pomada efeito fosco</strong>: controle natural para uso diário.</li>
+                <li><strong>Tônico</strong>: ajuda na saúde do couro e na sensação de frescor.</li>
+                <li><strong>Protetor térmico</strong>: indispensável se usa secador/chapinha.</li>
+              </ul>
+              <p class="text-white/70 text-sm">Dica: traga seu kit atual que a gente ajusta a rotina no balcão, sem custo.</p>
+            `
+          }
+        };
+
+        const postView = document.getElementById('postView');
+        const postHeroImg = document.getElementById('postHeroImg');
+        const postTitle = document.getElementById('postTitle');
+        const postMeta = document.getElementById('postMeta');
+        const postContent = document.getElementById('postContent');
+        const btnClosePost = document.getElementById('btnClosePost');
+        const shareLink = document.getElementById('shareLink');
+
+        function openPost(slug) {
+          const data = postDB[slug];
+          if (!data) return;
+          postTitle.textContent = data.title;
+          postMeta.textContent = `${data.author} • ${data.date}`;
+          postHeroImg.src = data.cover;
+          postHeroImg.alt = data.title;
+          postContent.innerHTML = data.html;
+          postView.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+          // Link de compartilhamento
+          const url = `${location.origin}${location.pathname}#post/${slug}`;
+          shareLink.href = url;
+          shareLink.onclick = (e) => {
+            e.preventDefault();
+            navigator.clipboard?.writeText(url);
+            alert('Link do artigo copiado!');
+          };
+          // Foco acessível
+          btnClosePost.focus();
+        }
+
+        function closePost() {
+          postView.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+          // Volta para o blog
+          const blog = document.getElementById('blog');
+          if (blog) window.scrollTo({ top: blog.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        btnClosePost?.addEventListener('click', (e) => {
+          e.preventDefault();
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+          closePost();
+        });
+
+        // Delegação para "Ler mais"
+        document.body.addEventListener('click', (e) => {
+          const t = e.target;
+          if (t.matches('.read-more')) {
+            const slug = t.getAttribute('data-slug');
+            if (slug) openPost(slug);
+          }
+        });
+
+        // Roteamento por hash (#post/<slug>)
+        function handleHashRoute() {
+          const h = location.hash || '';
+          const m = h.match(/^#post\/([a-z0-9-]+)/i);
+          if (m && m[1]) {
+            openPost(m[1]);
+          } else {
+            // se estava aberto e o hash sumiu, fecha
+            if (!h && !postView.classList.contains('hidden')) {
+              closePost();
+            }
+          }
+        }
+        window.addEventListener('hashchange', handleHashRoute);
+        handleHashRoute(); // abrir direto se já vier com hash
+      });
+    </script>
+  </body>
+</html>
